@@ -28,6 +28,7 @@ const tagMap = {
   [BLOCKS.LIST_ITEM]: 'li',
   [BLOCKS.QUOTE]: 'blockquote',
   [BLOCKS.HR]: 'hr',
+  [BLOCKS.EMBEDDED_ASSET]: 'embedded-asset-block',
   [INLINES.HYPERLINK]: 'a',
   [MARKS.BOLD]: 'strong',
   [MARKS.ITALIC]: 'em',
@@ -110,7 +111,7 @@ export function customNodeToJsx(node, options, key) {
   const { data, content, nodeType } = node;
   const { overrides, createElement } = options;
 
-  const contentType = get(data, 'target.contentType');
+  const contentType = get(data, 'target.contentType') || nodeType;
 
   if (!contentType) {
     return unknownNodeToJsx(node, options, key);
